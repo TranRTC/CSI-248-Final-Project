@@ -51,8 +51,8 @@ const ListBuy = () => {
       <ScrollView style={styles.shoppingList}>
         {shoppingList.map((item, index) => (
           <View key={index} style={styles.shoppingListItem}>
-            <Text>{item.ingredient}</Text>
-            <Text>{`${item.quantity} ${item.unit}`}</Text>
+            <Text style={styles.shoppingListItemText}>{item.ingredient}</Text>
+            <Text style={styles.shoppingListItemText}>{`${item.quantity} ${item.unit}`}</Text>
             <TouchableOpacity onPress={() => removeItemFromShoppingList(index)} style={styles.removeButton}>
               <Text style={styles.removeButtonText}>Remove</Text>
             </TouchableOpacity>
@@ -70,27 +70,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: '#f4f4f4',
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 16,
+    color: '#333',
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
+    height: 50,
+    fontSize: 18,
+    borderColor: '#ccc',
     borderWidth: 1,
     marginBottom: 16,
-    paddingLeft: 8,
+    paddingLeft: 12,
+    borderRadius: 5,
+    backgroundColor: '#fff',
   },
   addButton: {
-    backgroundColor: 'blue',
-    padding: 10,
+    backgroundColor: '#0070c9',
+    padding: 12,
     borderRadius: 5,
     alignItems: 'center',
   },
   addButtonLabel: {
-    color: 'white',
+    fontSize: 20,
+    color: '#fff',
     fontWeight: 'bold',
   },
   shoppingList: {
@@ -102,26 +108,36 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    paddingVertical: 8,
+    borderBottomColor: '#ccc',
+    paddingVertical: 12,
+  },
+  shoppingListItemText: {
+    fontSize: 18,
+    color: '#333',
   },
   removeButton: {
-    backgroundColor: 'red',
-    padding: 4,
+    backgroundColor: 'transparent',
+    borderColor: '#dd3d31',
+    borderWidth: 1,
+    padding: 6,
     borderRadius: 3,
   },
   removeButtonText: {
-    color: 'white',
+    fontSize: 16,
+    color: '#dd3d31',
   },
   clearButton: {
-    backgroundColor: 'gray',
-    padding: 10,
+    backgroundColor: 'transparent',
+    borderColor: '#0070c9',
+    borderWidth: 1,
+    padding: 12,
     borderRadius: 5,
     alignItems: 'center',
     marginTop: 16,
   },
   clearButtonText: {
-    color: 'white',
+    fontSize: 20,
+    color: '#0070c9',
     fontWeight: 'bold',
   },
 });

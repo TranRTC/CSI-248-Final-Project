@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const PlanData = [
   {
@@ -40,22 +42,16 @@ const PlanData = [
   },
 ];
 
-const MealPlan = ({selectedDate, selectedRecipe}) => {
+const MealPlan = ({ selectedDate, selectedRecipe }) => {
   const [mealPlanData, setMealPlanData] = useState([]);
-  
 
   const addMeal = () => {
     if (selectedDate && selectedRecipe) {
       const newMealPlan = { date: selectedDate, recipe: selectedRecipe };
-      setMealPlanData([newMealPlan,...mealPlanData]);
-      
-      //setSelectedDate('');
-      //setSelectedRecipe('');
+      setMealPlanData([newMealPlan, ...mealPlanData]);
       console.log('New meal added:', newMealPlan);
     }
   };
-
-  
 
   const removeEntry = (dateIndex) => {
     const updatedMealPlanData = [...mealPlanData];
@@ -96,14 +92,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: '#f4f4f4',
   },
   header: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 16,
+    color: '#333',
   },
   scrollContainer: {
-    maxHeight: 400,
+    maxHeight: height * 0.5,
   },
   entry: {
     marginBottom: 16,
@@ -114,7 +112,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   recipeTitle: {
-    fontSize: 16,
+    fontSize: 18,
+    color: '#333',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -124,25 +123,30 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 40,
-    borderColor: 'gray',
+    height: height * 0.05,
+    fontSize: 18,
+    borderColor: '#ccc',
     borderWidth: 1,
     marginRight: 10,
-    paddingLeft: 10,
+    paddingLeft: 12,
+    borderRadius: 5,
+    backgroundColor: '#fff',
   },
   addMealButton: {
-    backgroundColor: 'blue',
-    padding: 10,
+    backgroundColor: '#0070c9',
+    padding: 12,
     borderRadius: 5,
     alignItems: 'center',
   },
   addMealButtonText: {
-    color: 'white',
+    fontSize: 20,
+    color: '#fff',
     fontWeight: 'bold',
   },
   deleteButton: {
     color: 'red',
     marginTop: 5,
+    fontSize: 16,
   },
 });
 
