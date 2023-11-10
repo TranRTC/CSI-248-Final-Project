@@ -1,9 +1,5 @@
-
-
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, FlatList, Text, StyleSheet } from 'react-native';
-
-
 
 const recipesData = [
     {
@@ -55,36 +51,73 @@ const recipesData = [
       ],
       instructions: 'Mash the avocado with a fork and spread it on the toasted bread. Season with salt, pepper, and red pepper flakes. Top with eggs if desired.',
     },
-    // Add more recipes with mealType as needed for testing
+    {
+      id: 4,
+      title: 'Grilled Chicken Salad',
+      imageUrl: 'https://via.placeholder.com/150',
+      mealType: 'lunch',
+      ingredients: [
+        '2 boneless, skinless chicken breasts',
+        '2 tablespoons olive oil',
+        'Salt and pepper to taste',
+        '1/2 cup cherry tomatoes, halved',
+        '1/2 cucumber, sliced',
+        '1/4 red onion, thinly sliced',
+        '4 cups mixed greens',
+        'Balsamic vinaigrette dressing',
+      ],
+      instructions: 'Season chicken breasts with olive oil, salt, and pepper, then grill until cooked through. Slice the grilled chicken into strips. In a large bowl, combine cherry tomatoes, cucumber, red onion, and mixed greens. Top with grilled chicken strips and drizzle with balsamic vinaigrette dressing.',
+    },
+    {
+      id: 5,
+      title: 'Chocolate Chip Cookies',
+      imageUrl: 'https://via.placeholder.com/150',
+      mealType: 'dessert',
+      ingredients: [
+        '1 cup butter, softened',
+        '3/4 cup granulated sugar',
+        '3/4 cup brown sugar, packed',
+        '2 large eggs',
+        '1 teaspoon vanilla extract',
+        '2 1/4 cups all-purpose flour',
+        '1 teaspoon baking soda',
+        '1/2 teaspoon salt',
+        '2 cups semisweet chocolate chips',
+      ],
+      instructions: 'Preheat oven to 375°F (190°C). In a large mixing bowl, cream together the softened butter, granulated sugar, and brown sugar until well blended. Beat in the eggs one at a time, then stir in the vanilla. In a separate bowl, combine the flour, baking soda, and salt. Gradually add the dry ingredients to the wet ingredients and mix well. Finally, fold in the chocolate chips. Drop by rounded tablespoons onto ungreased baking sheets. Bake for 8 to 10 minutes until golden brown. Cool on wire racks.',
+    },
   ];
-
+  
 
 const RecipeSearch = ({ onRecipeSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredRecipes, setFilteredRecipes] = useState('');
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    const filtered = recipesData.filter(recipe =>
+    const filtered = recipesData.filter((recipe) =>
       recipe.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredRecipes(filtered);
   };
 
   const handleSelectRecipe = (id, recipe) => {
-    setSelectedRecipeId(id === selectedRecipeId ? null : id); // Toggle the selected state
-    const selectedRecipeTitle = id === selectedRecipeId ? null : recipe.title; // Get the selected recipe title
-    onRecipeSelect(selectedRecipeTitle); // Call the callback to update the selected recipe title in App.js
-  };
+    if (id === selectedRecipeId) {
+      return; // Do nothing if the selected recipe is already the same
+    }
 
-  
+    setSelectedRecipeId(id);
+
+    const selectedRecipeTitle = recipe.title;
+    onRecipeSelect(selectedRecipeTitle);
+  };
 
   const renderItem = ({ item }) => (
     <View>
       <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
         <Text style={styles.recipeItem}>{item.title}</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
       {selectedRecipeId === item.id && (
         <View style={styles.recipeDetails}>
           <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
@@ -112,14 +145,13 @@ const RecipeSearch = ({ onRecipeSelect }) => {
         data={filteredRecipes}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
-        extraData={selectedRecipeId} // Add this line to ensure the list updates when state changes
+        extraData={selectedRecipeId}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  // ... existing styles
   container: {
     flex: 1,
     backgroundColor: '#fff', // Background color for the whole container

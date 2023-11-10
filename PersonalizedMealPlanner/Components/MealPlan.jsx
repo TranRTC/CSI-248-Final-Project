@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
 const PlanData = [
   {
@@ -42,16 +40,22 @@ const PlanData = [
   },
 ];
 
-const MealPlan = ({ selectedDate, selectedRecipe }) => {
+const MealPlan = ({selectedDate, selectedRecipe}) => {
   const [mealPlanData, setMealPlanData] = useState([]);
+  
 
   const addMeal = () => {
     if (selectedDate && selectedRecipe) {
       const newMealPlan = { date: selectedDate, recipe: selectedRecipe };
-      setMealPlanData([newMealPlan, ...mealPlanData]);
+      setMealPlanData([newMealPlan,...mealPlanData]);
+      
+      //setSelectedDate('');
+      //setSelectedRecipe('');
       console.log('New meal added:', newMealPlan);
     }
   };
+
+  
 
   const removeEntry = (dateIndex) => {
     const updatedMealPlanData = [...mealPlanData];
@@ -92,16 +96,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f4f4f4',
   },
   header: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: '#333',
   },
   scrollContainer: {
-    maxHeight: height * 0.5,
+    maxHeight: 400,
   },
   entry: {
     marginBottom: 16,
@@ -112,8 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   recipeTitle: {
-    fontSize: 18,
-    color: '#333',
+    fontSize: 16,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -123,14 +124,11 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: height * 0.05,
-    fontSize: 18,
-    borderColor: '#ccc',
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
     marginRight: 10,
-    paddingLeft: 12,
-    borderRadius: 5,
-    backgroundColor: '#fff',
+    paddingLeft: 10,
   },
   addMealButton: {
     backgroundColor: '#0070c9',
@@ -139,14 +137,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addMealButtonText: {
-    fontSize: 20,
-    color: '#fff',
+    color: 'white',
     fontWeight: 'bold',
   },
   deleteButton: {
     color: 'red',
     marginTop: 5,
-    fontSize: 16,
   },
 });
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, Platform } from 'react-native';
+import { View, Button, Platform, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const DateSelect = ({ onDateSelect }) => {
@@ -7,29 +7,17 @@ const DateSelect = ({ onDateSelect }) => {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
-/*   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-
-    
-    // Call the callback function to pass the selected date to the parent component
-    onDateSelect(currentDate);
-  };
- */
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-  
-    // Format the selected date as a string
+
     const formattedDate = currentDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
-  
-    // Call the callback function to pass the formatted date string to the parent component
+
     onDateSelect(formattedDate);
   };
 
@@ -39,9 +27,13 @@ const DateSelect = ({ onDateSelect }) => {
   };
 
   return (
-    <View>
-      <View>
-        <Button onPress={() => showMode('date')} title="Select Date" />
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button
+          onPress={() => showMode('date')}
+          title="Select Date"
+          color="#007AFF" // Apple-like blue color
+        />
       </View>
       {show && (
         <DateTimePicker
@@ -56,5 +48,18 @@ const DateSelect = ({ onDateSelect }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 0.2,
+    padding: 16,
+    backgroundColor: '#f4f4f4', // Add margin to create space below the component
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    marginBottom: 10,
+    
+  },
+});
 
 export default DateSelect;
