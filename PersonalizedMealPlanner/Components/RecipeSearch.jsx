@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     marginTop: 10, // Indent ingredients for better readability
   },
   instructionsText: {
-    marginTop: 45,
+    marginTop: 35,
     marginLeft: 10,
     marginRight: 10,
   },

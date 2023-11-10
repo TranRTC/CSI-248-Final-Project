@@ -1,35 +1,22 @@
 import { Platform, StatusBar } from 'react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React from 'react';
 
 import RecipeSearch from './Components/RecipeSearch';
-
-
-
-
+import DateSelect from './Components/DateSelect';
+import MealPlan from './Components/MealPlan';
 
 export default function App() {
-
-
-
-
-
-//=======UserAuthentication================
-
-//========RecipeSearch======================
-
-
-//=========MealPlanner======================
-
-//=========ShoppingList=====================
-
-
-
   return (
     <View style={styles.container}>
-    <Text style={styles.appTitle}>Personalized Meal Planner</Text>
-    <StatusBar style="auto" />
-    <RecipeSearch/>
-  </View>
+      <Text style={styles.appTitle}>Personalized Meal Planner</Text>
+      <StatusBar style="auto" />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <DateSelect />
+        <RecipeSearch />
+        <MealPlan />
+      </ScrollView>
+    </View>
   );
 }
 
@@ -39,13 +26,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // Add padding to accommodate the status bar height on Android
+    
   },
   appTitle: {
-    fontSize: 20, // You can adjust the size as needed
-    fontWeight: 'bold', // This makes the text bold
-    marginTop: 80, // This adds space to the top of the text
-    // ...any other styling you want for the app title
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 80,
   },
-  // ...other styles
+  scrollContainer: {
+    flexGrow: 1, // Allow the content to grow and fill the available space
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // Additional styles for your components here:
+  // Example:
+  // componentContainer: {
+  //   marginBottom: 20,
+  // },
+  // componentText: {
+  //   fontSize: 16,
+  // },
 });
