@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 3,
     //marginLeft: 20,
-    //width: 300,
+    width:'85%',
     //height: 50,
     marginHorizontal: 5,
     paddingHorizontal: 5,
