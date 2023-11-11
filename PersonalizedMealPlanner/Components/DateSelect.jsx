@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, Platform, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Platform, Text, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const DateSelect = ({ onDateSelect }) => {
@@ -28,13 +28,12 @@ const DateSelect = ({ onDateSelect }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button
-          onPress={() => showMode('date')}
-          title="Select Date"
-          color="#007AFF" // Apple-like blue color
-        />
-      </View>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => showMode('date')}
+      >
+        <Text style={styles.buttonText}>Select Date</Text>
+      </TouchableOpacity>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -51,15 +50,28 @@ const DateSelect = ({ onDateSelect }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
-    padding: 16,
-    backgroundColor: '#f4f4f4', // Add margin to create space below the component
-    marginBottom: 10,
+    flex: 1,
+    padding: 16,    
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start', 
+    //backgroundColor: '#f4f4f4',
+    //marginBottom: 10,
   },
   buttonContainer: {
-    marginBottom: 10,
-    
+    backgroundColor: '#0070c9',
+    padding: 12,
+    borderRadius: 5,
+    // marginLeft: 'auto', // Remove this line
+    alignSelf: 'flex-start', // Add this line to left-align the button text
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
+
 
 export default DateSelect;

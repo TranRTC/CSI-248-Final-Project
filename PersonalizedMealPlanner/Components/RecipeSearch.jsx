@@ -141,30 +141,39 @@ const RecipeSearch = ({ onRecipeSelect }) => {
         value={searchQuery}
         onChangeText={handleSearch}
       />
-      <FlatList
-        data={filteredRecipes}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-        extraData={selectedRecipeId}
-      />
+      {searchQuery ? (
+  <FlatList
+    data={filteredRecipes}
+    renderItem={renderItem}
+    keyExtractor={item => item.id.toString()}
+    extraData={selectedRecipeId}
+  />
+) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1,   
     backgroundColor: '#fff', // Background color for the whole container
-    paddingTop: 50, // To ensure the container doesn't start right at the top of the screen
+    paddingTop: 20, // To ensure the container doesn't start right at the top of the screen
+    marginLeft: 10,
   },
   searchInput: {
-    marginHorizontal: 20, // Add some horizontal margin
-    paddingHorizontal: 10, // Padding from the left and right inside the input
-    paddingVertical: 8, // Padding from the top and bottom inside the input
-    borderColor: '#ccc', // Border color for the input
-    borderWidth: 1, // Border width for the input
-    borderRadius: 20, // Rounded corners for the input field
-    fontSize: 16, // Text size
+    flex: 3,
+    //marginLeft: 20,
+    //width: 300,
+    //height: 50,
+    marginHorizontal: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 8,
+    borderColor: '#007AFF', // Set the color of the border
+    borderWidth: 2,
+    borderRadius: 10,
+    fontSize: 16,
+    color: 'black', // Set the color of the text entered by the user
+    
   },
   recipeItem: {
     padding: 10, // Padding inside each recipe item for spacing

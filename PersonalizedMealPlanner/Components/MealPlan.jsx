@@ -65,7 +65,7 @@ const MealPlan = ({selectedDate, selectedRecipe}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Meal Planner</Text>
+      <Text style={styles.header}>Plan Meal</Text>
 
       {/* Input for adding a new date and recipe */}
       <View style={styles.inputContainer}>
