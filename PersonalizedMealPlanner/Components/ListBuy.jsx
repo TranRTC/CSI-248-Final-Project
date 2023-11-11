@@ -68,7 +68,7 @@ const ListBuy = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 9,
+    flex: 8,
     padding: 16,
     backgroundColor: '#f4f4f4',
   },
