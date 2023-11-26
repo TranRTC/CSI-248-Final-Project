@@ -6,6 +6,7 @@ import RecipeSearch from './Components/RecipeSearch';
 import DateSelect from './Components/DateSelect';
 import MealPlan from './Components/MealPlan';
 import ListBuy from './Components/ListBuy';
+import PictureTake from './Components/PictureTake';
 
 export default function App() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -26,10 +27,12 @@ export default function App() {
       <StatusBar style="auto" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <DateSelect onDateSelect={handleDateSelect} />
-        <RecipeSearch onRecipeSelect={handleRecipeSelect} />
+        <RecipeSearch onRecipeSelect={handleRecipeSelect} />        
         <MealPlan selectedDate={selectedDate} selectedRecipe={selectedRecipe} />
         <ListBuy />
+        <PictureTake/>
       </ScrollView>
+      
     </View>
   );
 }
