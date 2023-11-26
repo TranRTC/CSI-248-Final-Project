@@ -30,9 +30,9 @@ export default function App() {
         <RecipeSearch onRecipeSelect={handleRecipeSelect} />        
         <MealPlan selectedDate={selectedDate} selectedRecipe={selectedRecipe} />
         <ListBuy />
-        <PictureTake/>
+        <PictureTake/>       
       </ScrollView>
-      
+     
     </View>
   );
 }

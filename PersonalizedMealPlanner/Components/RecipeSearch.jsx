@@ -142,12 +142,12 @@ const RecipeSearch = ({ onRecipeSelect }) => {
         onChangeText={handleSearch}
       />
       {searchQuery ? (
-  <FlatList
-    data={filteredRecipes}
-    renderItem={renderItem}
-    keyExtractor={item => item.id.toString()}
-    extraData={selectedRecipeId}
-  />
+    <FlatList
+      data={filteredRecipes}
+      renderItem={renderItem}
+      keyExtractor={item => item.id.toString()}
+      extraData={selectedRecipeId}
+    />
 ) : null}
     </View>
   );
@@ -155,13 +155,13 @@ const RecipeSearch = ({ onRecipeSelect }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,   
+    flex: 0.5,   
     backgroundColor: '#fff', // Background color for the whole container
-    paddingTop: 20, // To ensure the container doesn't start right at the top of the screen
+    paddingTop: 3, // To ensure the container doesn't start right at the top of the screen
     marginLeft: 10,
   },
   searchInput: {
-    flex: 3,
+    flex: 1,
     //marginLeft: 20,
     width:'85%',
     //height: 50,

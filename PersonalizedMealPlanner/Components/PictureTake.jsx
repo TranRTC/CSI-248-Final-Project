@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
@@ -7,7 +9,7 @@ import * as Sharing from 'expo-sharing';
 export default function PictureTake() {
   const cameraRef = useRef(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);/*  */
   const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
@@ -83,35 +85,46 @@ export default function PictureTake() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 16,
+     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: '#fff', // Added for clarit
   },
   previewContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'space-between',
   },
   camera: {
-    flex: 1,
+    //flex: 1,
+    height: 200,
     width: '100%',
+    justifyContent: 'flex-end', // Align the button to the bottom
   },
   preview: {
     width: 300,
-    height: 300,
+    height: 170,
     alignSelf: 'center',
-    margin: 20,
   },
   bootstrapButton: {
-    backgroundColor: '#007bff', // Bootstrap primary color
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+
+    backgroundColor: '#0070c9',
+    padding: 12,
     borderRadius: 5,
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom:2
+    //backgroundColor: '#007bff', // Bootstrap primary color
+    //paddingVertical: 10,
+   // paddingHorizontal: 20,
+   // borderRadius: 5,
+    //alignItems: 'center',
+    //marginBottom: 10,
   },
-  bootstrapButtonText: {
+  bootstrapButtonText: {    
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
 });
+
+
