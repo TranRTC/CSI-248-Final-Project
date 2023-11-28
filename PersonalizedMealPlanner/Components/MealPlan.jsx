@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { v4 as uuidv4 } from 'uuid';
 
-
+// use to create ID for the mealplan object
+let IdCounter = 8;
 
 const MealPlan = ({selectedDate, selectedRecipe, plannedMeals }) => {
   const [mealPlanData, setMealPlanData] = useState(plannedMeals);
   
 
   const addMeal = () => {
+    // check if date is selected and recipe is selected then
     if (selectedDate && selectedRecipe) {
 
-      let nextId = 10; // Start with 10 and increment for each new meal plan
-      function createMealPlan(date, recipe) {
-        return {
-          id: nextId++, // Assign and increment the ID
-          recipe: recipe,
-          date: date
-        };
-      }
-
-      const newMealPlan = createMealPlan({ date: selectedDate}, {recipe: selectedRecipe });
+      // create new mealplan object with simple id by inreamenting after one another
+      const newMealPlan = {
+        id: IdCounter++,
+        recipe: selectedRecipe,
+        date: selectedDate
+      };
+      
+      // add new mealplan to the current mealplan array
       setMealPlanData([newMealPlan,...mealPlanData]);
       
       //setSelectedDate('');
       //setSelectedRecipe('');
       console.log('New meal added:', newMealPlan);
     }
-  };
-  
+  };  
 
   const removeEntry = (dateIndex) => {
     const updatedMealPlanData = [...mealPlanData];

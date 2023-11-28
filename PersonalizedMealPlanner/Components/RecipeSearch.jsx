@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, FlatList, Text, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, FlatList, ScrollView, Text, StyleSheet } from 'react-native';
 
 const recipesData = [
     {
@@ -142,13 +142,28 @@ const RecipeSearch = ({ onRecipeSelect }) => {
         onChangeText={handleSearch}
       />
       {searchQuery ? (
-    <FlatList
-      data={filteredRecipes}
-      renderItem={renderItem}
-      keyExtractor={item => item.id.toString()}
-      extraData={selectedRecipeId}
-    />
-) : null}
+        <ScrollView>
+          {filteredRecipes.map((item) => (
+            <View key={item.id}>
+              <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
+                <Text style={styles.recipeItem}>{item.title}</Text>
+              </TouchableOpacity>
+              {selectedRecipeId === item.id && (
+                <View style={styles.recipeDetails}>
+                  <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
+                  {item.ingredients.map((ingredient, index) => (
+                    <Text key={index} style={styles.ingredientItem}>
+                      {ingredient}
+                    </Text>
+                  ))}
+                  <Text style={styles.recipeDetailsTitle}>Instructions:</Text>
+                  <Text style={styles.instructionsText}>{item.instructions}</Text>
+                </View>
+              )}
+            </View>
+          ))}
+        </ScrollView>
+      ) : null}
     </View>
   );
 };

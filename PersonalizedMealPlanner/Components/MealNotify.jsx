@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Notifications from 'expo-notifications';
 
 async function requestNotificationsPermission() {
@@ -8,8 +8,6 @@ async function requestNotificationsPermission() {
     alert('Permission for notifications was denied');
   }
 }
-
-
 
 const MealNotify = ({ mealPlans }) => {
 
@@ -37,12 +35,46 @@ const MealNotify = ({ mealPlans }) => {
   };
 
   return (
-    <View style={{ padding: 20, alignItems: 'center' }}>
+    <View style={styles.container}>
       {mealPlans.map((plan, index) => (
-        <Text key={index}>Next Meal: {plan.recipe} at {plan.date}</Text>
+        <TouchableOpacity key={index} style={styles.notificationCard}>
+          <Text style={styles.notificationTitle}>Next Meal: {plan.recipe}</Text>
+          <Text style={styles.notificationSubtitle}>Scheduled for {plan.date}</Text>
+        </TouchableOpacity>
       ))}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    alignItems: 'flex-start',
+  },
+  notificationCard: {
+    backgroundColor: '#f9f9f9', // Light background color
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    shadowColor: '#000', // Shadow for a subtle depth effect
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  notificationTitle: {
+    color: '#000', // Dark text color
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  notificationSubtitle: {
+    color: '#666', // Subdued text color for subtitles
+    fontSize: 14,
+    marginTop: 5,
+  }
+});
 
 export default MealNotify;
