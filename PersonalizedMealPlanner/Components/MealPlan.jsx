@@ -1,52 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
-const PlanData = [
-  {
-    date: 'November 15, 2023',
-    recipe: 'Oatmeal',
-  },
-  {
-    date: 'November 15, 2023',
-    recipe: 'Chicken Salad',
-  },
-  {
-    date: 'November 15, 2023',
-    recipe: 'Grilled Salmon',
-  },
-  {
-    date: 'November 16, 2023',
-    recipe: 'Scrambled Eggs',
-  },
-  {
-    date: 'November 16, 2023',
-    recipe: 'Caesar Salad',
-  },
-  {
-    date: 'November 16, 2023',
-    recipe: 'Spaghetti Bolognese',
-  },
-  {
-    date: 'November 17, 2023',
-    recipe: 'Yogurt Parfait',
-  },
-  {
-    date: 'November 17, 2023',
-    recipe: 'Turkey Sandwich',
-  },
-  {
-    date: 'November 17, 2023',
-    recipe: 'Vegetable Stir-Fry',
-  },
-];
 
-const MealPlan = ({selectedDate, selectedRecipe}) => {
-  const [mealPlanData, setMealPlanData] = useState([]);
+
+const MealPlan = ({selectedDate, selectedRecipe, plannedMeals }) => {
+  const [mealPlanData, setMealPlanData] = useState(plannedMeals);
   
 
   const addMeal = () => {
     if (selectedDate && selectedRecipe) {
-      const newMealPlan = { date: selectedDate, recipe: selectedRecipe };
+
+      let nextId = 10; // Start with 10 and increment for each new meal plan
+      function createMealPlan(date, recipe) {
+        return {
+          id: nextId++, // Assign and increment the ID
+          recipe: recipe,
+          date: date
+        };
+      }
+
+      const newMealPlan = createMealPlan({ date: selectedDate}, {recipe: selectedRecipe });
       setMealPlanData([newMealPlan,...mealPlanData]);
       
       //setSelectedDate('');
@@ -54,7 +27,6 @@ const MealPlan = ({selectedDate, selectedRecipe}) => {
       console.log('New meal added:', newMealPlan);
     }
   };
-
   
 
   const removeEntry = (dateIndex) => {

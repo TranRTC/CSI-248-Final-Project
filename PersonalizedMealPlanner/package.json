@@ -20,7 +20,8 @@
     "@react-native-community/datetimepicker": "7.2.0",
     "expo-camera": "~13.4.4",
     "expo-media-library": "~15.4.1",
-    "expo-sharing": "~11.5.0"
+    "expo-sharing": "~11.5.0",
+    "expo-notifications": "~0.20.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
