@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'left',
     backgroundColor: '#fff',
   },
   previewContainer: {
@@ -115,9 +115,10 @@ const styles = StyleSheet.create({
   bootstrapButton: {
     backgroundColor: '#0070c9',
     padding: 12,
-    borderRadius: 5,
+   borderRadius: 5,
     alignItems: 'center',
     marginBottom: 2,
+    alignSelf: 'stretch', // This will make the button stretch to fill the width of its container
   },
   bootstrapButtonText: {
     color: 'white',
