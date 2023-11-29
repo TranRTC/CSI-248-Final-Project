@@ -11,51 +11,52 @@ import MealNotify from './Components/MealNotify';
 
 const plannedMeals = [
   {
-    id: 1,
-    date: 'November 15, 2023',
+    id: 0,
+    date: '2023-11-30', // Changed to 'YYYY-MM-DD' format
     recipe: 'Oatmeal',
   },
   {
-    id: 2,
-    date: 'November 15, 2023',
+    id: 1,
+    date: '2023-11-29',
     recipe: 'Chicken Salad',
   },
   {
-    id:3,
-    date: 'November 15, 2023',
+    id: 2,
+    date: '2023-11-15',
     recipe: 'Grilled Salmon',
   },
   {
-    id:4,
-    date: 'November 16, 2023',
+    id: 3,
+    date: '2023-11-16',
     recipe: 'Scrambled Eggs',
   },
   {
-    id:5,
-    date: 'November 16, 2023',
+    id: 4,
+    date: '2023-11-16',
     recipe: 'Caesar Salad',
   },
   {
-    id:6,
-    date: 'November 16, 2023',
+    id: 5,
+    date: '2023-11-16',
     recipe: 'Spaghetti Bolognese',
   },
   {
-    id:8,
-    date: 'November 17, 2023',
+    id: 6,
+    date: '2023-11-17',
     recipe: 'Yogurt Parfait',
   },
   {
-    id:9,
-    date: 'November 17, 2023',
+    id: 7,
+    date: '2023-11-17',
     recipe: 'Turkey Sandwich',
   },
   {
-    id:10,
-    date: 'November 17, 2023',
+    id: 8,
+    date: '2023-11-17',
     recipe: 'Vegetable Stir-Fry',
   },
 ];
+
 
 export default function App() {
   const [selectedDate, setSelectedDate] = useState(null);

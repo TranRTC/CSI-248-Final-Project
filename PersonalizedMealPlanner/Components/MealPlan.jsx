@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 
 import { v4 as uuidv4 } from 'uuid';
 
 // use to create ID for the mealplan object
-let IdCounter = 8;
+let IdCounter = 9;
 
 const MealPlan = ({selectedDate, selectedRecipe, plannedMeals }) => {
   const [mealPlanData, setMealPlanData] = useState(plannedMeals);
