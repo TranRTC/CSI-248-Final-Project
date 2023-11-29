@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch', // This will make the button stretch to fill the width of its container
   },
   bootstrapButtonText: {
-    color: 'white',
-    fontSize: 16,
+    fontSize: 18,
+    color: '#fff',
     fontWeight: 'bold',
   },
   header: {

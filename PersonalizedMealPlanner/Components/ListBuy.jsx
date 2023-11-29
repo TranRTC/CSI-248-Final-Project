@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   shoppingListItemText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#333',
   },
   removeButton: {

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   date: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
   },
