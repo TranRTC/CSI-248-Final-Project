@@ -58,6 +58,7 @@ export default function PictureTake() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>Take Photos</Text>
       {photo ? (
         <View style={styles.previewContainer}>
           <Image source={{ uri: photo.uri }} style={styles.preview} />
@@ -72,6 +73,7 @@ export default function PictureTake() {
           </TouchableOpacity>
         </View>
       ) : (
+        
         <Camera style={styles.camera} ref={cameraRef}>
           <TouchableOpacity style={styles.bootstrapButton} onPress={takePhoto}>
             <Text style={styles.bootstrapButtonText}>Take Photo</Text>
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     //flex: 1,
     height: 200,
     width: '100%',
-    justifyContent: 'flex-end', // Align the button to the bottom
+    justifyContent: 'flex-start', // Align the button to the bottom
   },
   preview: {
     width: 300,
@@ -125,6 +127,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  header: {    
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  }
 });
 
 

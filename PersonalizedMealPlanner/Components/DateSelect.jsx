@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Platform, Text, StyleSheet } from 'react-native';
+// this component need import package @react-native-community/datetimepicker
+// this component work only in iphone. Not working in web
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+
+//props onDateSelect to move formated date to parent App() component
 const DateSelect = ({ onDateSelect }) => {
   // Create state variables
   // Hold current date
   const [date, setDate] = useState(new Date());
   // Hold current mode
   const [mode, setMode] = useState('date');
-  // Hold state show status
+  // Hold a state variable of bool type use to conditional rendering for the time picker when the button is click
   const [show, setShow] = useState(false);
 
+  // two parameters event & selectedDate are used passed from datepicker to eventhandler
   const onChange = (event, selectedDate) => {
 
-    
+    // choose selected date if it is truthy else will chose date
     const currentDate = selectedDate || date;
+
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
 
@@ -25,11 +31,12 @@ const DateSelect = ({ onDateSelect }) => {
       day: 'numeric',
     });
 
+    // this props used to pass the selected date to App. 
     onDateSelect(formattedDate);
   };
   // this is eventhandler for touching the "Select Date" button
   const showMode = (currentMode) => {
-    // bet show status variable to true to show the Picker in Date mode
+    //  show status variable to true to show the Picker in Date mode
     setShow(true);
     setMode(currentMode);
   };
@@ -44,7 +51,10 @@ const DateSelect = ({ onDateSelect }) => {
       >
         <Text style={styles.buttonText}>Select Date</Text>
       </TouchableOpacity>
-      {/* show is state variable used for conditional rendering*/}
+      {/* show is state variable used for conditional rendering
+      when the button is press, show change to true then the timepicker appear
+      
+      */}
       {show && (
         // Date time picker is passed with props
         <DateTimePicker
@@ -78,10 +88,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start', // Add this line to left-align the button text
   },
   buttonText: {
-    color: 'white',
-    fontSize: 16,
+    fontSize: 18,
+    color: '#fff',
     fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 

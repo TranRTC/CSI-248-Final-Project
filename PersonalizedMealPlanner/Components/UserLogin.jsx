@@ -2,8 +2,8 @@
 // web: 629952056122-elog52ppm0nagsimt09icfrts92ohi4d.apps.googleusercontent.com
 // ios: 629952056122-mfn77laejt4t5ecn8a4965sm2rqpeuev.apps.googleusercontent.com
 // android: 
-
-/* import React from 'react';
+/*
+import React from 'react';
 import { Button, View, StyleSheet, Platform } from 'react-native';
 import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
@@ -11,7 +11,7 @@ import * as WebBrowser from 'expo-web-browser';
 // This line is necessary for handling the redirect from Google's OAuth flow to Expo
 WebBrowser.maybeCompleteAuthSession();
 
-export default function App() {
+export default function UserLogin() {
   // Determine the correct clientId based on the platform
   const clientId = Platform.select({
     web: '629952056122-elog52ppm0nagsimt09icfrts92ohi4d.apps.googleusercontent.com',
@@ -104,3 +104,5 @@ const styles = StyleSheet.create({
   },
 });
  */
+
+// UserLogin.js

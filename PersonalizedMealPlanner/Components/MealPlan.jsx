@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addMealButtonText: {
-    color: 'white',
+    fontSize: 18,
+    color: '#fff',
     fontWeight: 'bold',
   },
   deleteButton: {

@@ -63,14 +63,15 @@ const MealNotify = ({ mealPlans }) => {
     });
   };
 
-
-  
+ 
 
   return (
     <View style={styles.container}>
+        <Text style={styles.header}>Notifications</Text>
       {!permissionRequested && (
         <TouchableOpacity onPress={handlePermissionRequest} style={styles.permissionButton}>
-          <Text>Request Notification Permission</Text>
+
+          <Text style={styles.permissionButtonText}>Allow</Text>
         </TouchableOpacity>
       )}
 
@@ -115,10 +116,26 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   permissionButton: {
-    backgroundColor: '#007bff',
-    padding: 10,
+    backgroundColor: '#0070c9',
+    padding: 12,
     borderRadius: 5,
-    marginBottom: 20,
+    alignItems: 'center',
+
+    //backgroundColor: '#007bff',
+    //padding: 10,
+    //borderRadius: 5,
+    //marginBottom: 20,
+  },permissionButtonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+    
+  },
+  header: {
+
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
   }
 });
 

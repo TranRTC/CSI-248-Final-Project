@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addButtonLabel: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#fff',
     fontWeight: 'bold',
   },
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   clearButtonText: {
-    fontSize: 20,
+    fontSize: 17,
     color: '#0070c9',
     fontWeight: 'bold',
   },

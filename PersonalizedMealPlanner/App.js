@@ -8,6 +8,7 @@ import MealPlan from './Components/MealPlan';
 import ListBuy from './Components/ListBuy';
 import PictureTake from './Components/PictureTake';
 import MealNotify from './Components/MealNotify';
+import UserLogin from './Components/UserLogin';
 
 //=====================Recipe Data for testing========================================
 const recipesData = [
@@ -173,13 +174,28 @@ export default function App() {
     // Update the selectedRecipe state with the entire recipe object
     setSelectedRecipe(recipe); 
     console.log('Selected recipe:', recipe.title); // Access the recipe title
+    
   };
+
+  /* const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Function to be called when user is authenticated
+  const onLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
+  if (!isAuthenticated) {
+    return <UserLogin onLoginSuccess={onLoginSuccess} />;
+  } */
+
 
   return (
     <View style={styles.container}>
       <Text style={styles.appTitle}>Personalized Meal Planner</Text>
       <StatusBar style="auto" />
+      
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+
         {/*pass prop as call back to DateSelect component */}
         <DateSelect onDateSelect={handleDateSelect} />
         {/* pass prop as callback and data to RecipeSearch component */}
@@ -188,7 +204,8 @@ export default function App() {
         <MealPlan selectedDate={selectedDate} selectedRecipe={selectedRecipe} plannedMeals={plannedMeals}/>
         <ListBuy />
         <PictureTake/>
-        <MealNotify mealPlans={plannedMeals}/>       
+        <MealNotify mealPlans={plannedMeals}/> 
+              
       </ScrollView>
      
     </View>
