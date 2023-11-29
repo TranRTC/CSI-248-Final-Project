@@ -48,7 +48,7 @@ const MealNotify = ({ mealPlans }) => {
           const scheduledNotification = await Notifications.scheduleNotificationAsync({
             content: {
               title: "Meal Reminder",
-              body: `Time for your meal: ${plan.recipe}`,
+              body: `Time for your meal: ${plan.date} ${plan.recipe}`,
             },
             // This code for testing purpose only it should be Date(oneDateBeforePlan)
             // mean that it will trigger 1 day ahead of the event. Below example will trigger after 5 sec for testing purpose
@@ -74,12 +74,16 @@ const MealNotify = ({ mealPlans }) => {
         </TouchableOpacity>
       )}
 
-      {mealPlans.map((plan, index) => (
-        <TouchableOpacity key={index} style={styles.notificationCard}>
-          <Text style={styles.notificationTitle}>Next Meal: {plan.recipe}</Text>
-          <Text style={styles.notificationSubtitle}>Scheduled for {plan.date}</Text>
-        </TouchableOpacity>
-      ))}
+      {mealPlans.filter(plan => {
+    const planDate = new Date(plan.date).getTime();
+    const now = new Date().getTime();
+    return planDate > now;
+  }).map((plan, index) => (
+    <TouchableOpacity key={index} style={styles.notificationCard}>
+      <Text style={styles.notificationTitle}>Next Meal: {plan.recipe}</Text>
+      <Text style={styles.notificationSubtitle}>Scheduled for {plan.date}</Text>
+    </TouchableOpacity>
+))}
     </View>
   );
 };

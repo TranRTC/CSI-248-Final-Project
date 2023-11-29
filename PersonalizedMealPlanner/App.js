@@ -12,7 +12,7 @@ import MealNotify from './Components/MealNotify';
 const plannedMeals = [
   {
     id: 0,
-    date: '2023-11-30', // Changed to 'YYYY-MM-DD' format
+    date: '2023-11-28', // Changed to 'YYYY-MM-DD' format
     recipe: 'Oatmeal',
   },
   {
@@ -22,7 +22,7 @@ const plannedMeals = [
   },
   {
     id: 2,
-    date: '2023-11-15',
+    date: '2023-11-30',
     recipe: 'Grilled Salmon',
   },
   {
