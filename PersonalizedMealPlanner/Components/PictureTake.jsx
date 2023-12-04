@@ -11,7 +11,7 @@ export default function PictureTake() {
   const [photo, setPhoto] = useState(null);
 
   const requestPermissions = async () => {
-    const cameraStatus = await Camera.requestPermissionsAsync();
+    const cameraStatus = await Camera.requestCameraPermissionsAsync();
     setHasCameraPermission(cameraStatus.status === 'granted');
 
     const mediaLibraryStatus = await MediaLibrary.requestPermissionsAsync();

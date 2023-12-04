@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import { v4 as uuidv4 } from 'uuid';
+//import { v4 as uuidv4 } from 'uuid';
 
 // use to create ID for the mealplan object
 let IdCounter = 9;
 
-const MealPlan = ({selectedDate, selectedRecipe, plannedMeals }) => {
-  const [mealPlanData, setMealPlanData] = useState(plannedMeals);
+const MealPlan = ({selectedDate, selectedRecipe, mealPlanData, SetMealPlanData }) => {
+
+  //const [mealPlanData, setMealPlanData] = useState(plannedMeals);
   
 
   const addMeal = () => {
@@ -21,7 +22,7 @@ const MealPlan = ({selectedDate, selectedRecipe, plannedMeals }) => {
       };
       
       // add new mealplan to the current mealplan array
-      setMealPlanData([newMealPlan,...mealPlanData]);
+      SetMealPlanData([newMealPlan,...mealPlanData]);
       
       //setSelectedDate('');
       //setSelectedRecipe('');
@@ -32,7 +33,7 @@ const MealPlan = ({selectedDate, selectedRecipe, plannedMeals }) => {
   const removeEntry = (dateIndex) => {
     const updatedMealPlanData = [...mealPlanData];
     updatedMealPlanData.splice(dateIndex, 1);
-    setMealPlanData(updatedMealPlanData);
+    SetMealPlanData(updatedMealPlanData);
   };
 
   return (

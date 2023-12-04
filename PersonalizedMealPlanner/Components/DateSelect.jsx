@@ -16,22 +16,27 @@ const DateSelect = ({ onDateSelect }) => {
   const [show, setShow] = useState(false);
 
   // two parameters event & selectedDate are used passed from datepicker to eventhandler
+  // in this cse event parameter is not used
   const onChange = (event, selectedDate) => {
+    
+    // with the selectedDate (parameter) passed from the touch event do below
 
-    // choose selected date if it is truthy else will chose date
+    // 1. choose selected date if it is truthy else will chose date
     const currentDate = selectedDate || date;
 
     setShow(Platform.OS === 'ios');
+
+    // 2. update current date to state variable date
     setDate(currentDate);
 
-    // This function used to format data time data
+    // 3. Format date time 
     const formattedDate = currentDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
 
-    // this props used to pass the selected date to App. 
+    // 4. uplift the selected date from child component to parent
     onDateSelect(formattedDate);
   };
   // this is eventhandler for touching the "Select Date" button
@@ -58,10 +63,10 @@ const DateSelect = ({ onDateSelect }) => {
       {show && (
         // Date time picker is passed with props
         <DateTimePicker
-          testID="dateTimePicker"
+          //testID="dateTimePicker"
           value={date}
           mode={mode}
-          is24Hour={true}
+          //is24Hour={true}
           display="default"
           onChange={onChange}
         />

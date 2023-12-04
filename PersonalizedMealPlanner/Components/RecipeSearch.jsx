@@ -4,10 +4,15 @@ import { View, TextInput, TouchableOpacity, ScrollView, Text, StyleSheet } from 
 
 
 const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
+
+  // hold and update searching query
   const [searchQuery, setSearchQuery] = useState('');
+  // hold and update filtered recipes after finding match with the above query
   const [filteredRecipes, setFilteredRecipes] = useState([]);
+  // hold and update selected recipe by the user
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
+// function to find tile of recipe which is mactched with the query and update to state variale
   const handleSearch = (query) => {
     setSearchQuery(query);
     const filtered = recipesData.filter((recipe) =>
@@ -15,6 +20,9 @@ const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
     );
     setFilteredRecipes(filtered);
   };
+
+// function to handle selected recipe
+// it takes in two parameter id and recipe
 
   const handleSelectRecipe = (id, recipe) => {
     if (id === selectedRecipeId) {
@@ -29,57 +37,75 @@ const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
     onRecipeSelect(selectedRecipeTitle);
   };
 
-  const renderItem = ({ item }) => (
-    <View>
-      <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
-        <Text style={styles.recipeItem}>{item.title}</Text>
-      </TouchableOpacity>
-      {selectedRecipeId === item.id && (
-        <View style={styles.recipeDetails}>
-          <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
-          {item.ingredients.map((ingredient, index) => (
-            <Text key={index} style={styles.ingredientItem}>
-              {ingredient}
-            </Text>
-          ))}
-          <Text style={styles.recipeDetailsTitle}>Instructions:</Text>
-          <Text style={styles.instructionsText}>{item.instructions}</Text>
-        </View>
-      )}
-    </View>
-  );
+  // const renderItem = ({ item }) => (
+  //   <View>
+      
+  //     <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
+  //       <Text style={styles.recipeItem}>{item.title}</Text>
+  //     </TouchableOpacity>
+
+  //     {selectedRecipeId === item.id && (
+  //       <View style={styles.recipeDetails}>
+  //         <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
+  //         {item.ingredients.map((ingredient, index) => (
+  //           <Text key={index} style={styles.ingredientItem}>
+  //             {ingredient}
+  //           </Text>
+  //         ))}
+  //         <Text style={styles.recipeDetailsTitle}>Instructions:</Text>
+  //         <Text style={styles.instructionsText}>{item.instructions}</Text>
+  //       </View>
+  //     )}
+  //   </View>
+  // );
+  
 
   return (
     <View style={styles.container}>
+      {/* Search input */}
       <TextInput
         style={styles.searchInput}
         placeholder="Search for recipes..."
         value={searchQuery}
         onChangeText={handleSearch}
       />
+      {/*Conditional rendering if have searching querry a scroll view will berender to hold the filter  */}
       {searchQuery ? (
+
         <ScrollView>
           {filteredRecipes.map((item) => (
             <View key={item.id}>
+
+              {/* each recipe title found is nested in Touchableopacity, whenever there is a touch on the title the handleSelected recipe is called */}
               <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
                 <Text style={styles.recipeItem}>{item.title}</Text>
               </TouchableOpacity>
+
+              {/* Conditional rendering */}
               {selectedRecipeId === item.id && (
+
                 <View style={styles.recipeDetails}>
                   <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
-                  {item.ingredients.map((ingredient, index) => (
-                    <Text key={index} style={styles.ingredientItem}>
-                      {ingredient}
-                    </Text>
-                  ))}
+
+                      {/*Display ingredient of selected recipe  */}
+                      {item.ingredients.map((ingredient, index) => (
+                        <Text key={index} style={styles.ingredientItem}>
+                          {ingredient}
+                        </Text>
+                      ))}
+
                   <Text style={styles.recipeDetailsTitle}>Instructions:</Text>
+                  {/*Display instruction of selected recipe */}
                   <Text style={styles.instructionsText}>{item.instructions}</Text>
                 </View>
+
               )}
             </View>
           ))}
         </ScrollView>
+
       ) : null}
+
     </View>
   );
 };

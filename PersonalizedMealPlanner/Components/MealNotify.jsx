@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Notifications from 'expo-notifications';
 
+// request the the permission for notification
 async function requestNotificationsPermission() {
   const { status } = await Notifications.requestPermissionsAsync();
   return status;
 }
 
+// MealNnotify component take in a parameter as array of meal plan
 const MealNotify = ({ mealPlans }) => {
+
+  // state variable and update funciton to hold the status ofo permission
   const [permissionRequested, setPermissionRequested] = useState(false);
 
+
+  // use useEffect() to monitor the change in the dependency array and execute the scheduleNotification
+  // MealPlan change & and Permission change will trigger the check "if" in side useEffect()
   useEffect(() => {
     if (permissionRequested) {
       scheduleNotifications(mealPlans);
@@ -20,13 +27,16 @@ const MealNotify = ({ mealPlans }) => {
     const status = await requestNotificationsPermission();
     if (status === 'granted') {
       setPermissionRequested(true);
-      scheduleNotifications(mealPlans);
+      //scheduleNotifications(mealPlans); reduncdant
     } else {
       alert('Permission for notifications was denied');
     }
   };
 
+  // scheduling function
   const scheduleNotifications = async (plans) => {
+
+    // get the time from the date 
     const now = new Date().getTime();
 
     plans.forEach(async (plan) => {
@@ -52,7 +62,7 @@ const MealNotify = ({ mealPlans }) => {
             },
             // This code for testing purpose only it should be Date(oneDateBeforePlan)
             // mean that it will trigger 1 day ahead of the event. Below example will trigger after 5 sec for testing purpose
-            trigger: { date: new Date(now + 5000) },
+            trigger: { date: new Date(now + 5000) }, // it should be (oneDateBeforePlan)
             // 
           });
           console.log(`Notification scheduled for ${plan.recipe}:`, scheduledNotification);
@@ -61,9 +71,7 @@ const MealNotify = ({ mealPlans }) => {
         }
       }
     });
-  };
-
- 
+  }; 
 
   return (
     <View style={styles.container}>

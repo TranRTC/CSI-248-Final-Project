@@ -177,17 +177,8 @@ export default function App() {
     
   };
 
-  /* const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Function to be called when user is authenticated
-  const onLoginSuccess = () => {
-    setIsAuthenticated(true);
-  };
-
-  if (!isAuthenticated) {
-    return <UserLogin onLoginSuccess={onLoginSuccess} />;
-  } */
-
+  //============================for MealPlan=========================================
+  const [mealPlanData, SetMealPlanData] = useState(plannedMeals);
 
   return (
     <View style={styles.container}>
@@ -201,10 +192,10 @@ export default function App() {
         {/* pass prop as callback and data to RecipeSearch component */}
         <RecipeSearch onRecipeSelect={handleRecipeSelect} recipesData={recipesData} /> 
         {/* pass prop as data hold by state variable & original mealplan data ( array of mealplans) */}       
-        <MealPlan selectedDate={selectedDate} selectedRecipe={selectedRecipe} plannedMeals={plannedMeals}/>
+        <MealPlan selectedDate={selectedDate} selectedRecipe={selectedRecipe} mealPlanData={mealPlanData} SetMealPlanData={SetMealPlanData}/>
         <ListBuy />
         <PictureTake/>
-        <MealNotify mealPlans={plannedMeals}/> 
+        <MealNotify mealPlans={mealPlanData}/> 
               
       </ScrollView>
      
