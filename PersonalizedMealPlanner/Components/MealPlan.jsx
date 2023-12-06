@@ -5,13 +5,12 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 
 // use to create ID for the mealplan object
 let IdCounter = 9;
 
-
 // function 4 arguments: 3 statevariable and 1 callback function
 // selectedDate, selectedRecipe, mealPlanData are passed down, SetMealPlanData is call back function to lift updata)
 
 const MealPlan = ({selectedDate, selectedRecipe, mealPlanData, SetMealPlanData }) => {
 
- 
+ // This function used to add new mealplan to the database
 
   const addMeal = () => {
 
@@ -34,40 +33,59 @@ const MealPlan = ({selectedDate, selectedRecipe, mealPlanData, SetMealPlanData }
     }
   };  
 
-  const removeEntry = (dateIndex) => {
+  // Remove function to take in one parameter that is the index of the entry want to remove
+  const removeEntry = (entryIndex) => {
+
+    //create a compy of mealPlanData array for the modification(delete)
     const updatedMealPlanData = [...mealPlanData];
-    updatedMealPlanData.splice(dateIndex, 1);
+
+    // use method .splice and pass arguments (from the index, 1 entry) to deleted the entry
+    updatedMealPlanData.splice(entryIndex, 1);
+
+    // update the mealPlandData after deleting the entry
+
     SetMealPlanData(updatedMealPlanData);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Plan Meal</Text>
+      <View style={styles.container}>
+            <Text style={styles.header}>Plan Meal</Text>
 
-      {/* Input for adding a new date and recipe */}
-      <View style={styles.inputContainer}>
-        
-        <TouchableOpacity onPress={addMeal} style={styles.addMealButton}>
-          <Text style={styles.addMealButtonText}>Add Meal</Text>
-        </TouchableOpacity>
+            {/* Input for adding a new date and recipe */}
+            <View style={styles.inputContainer}>
+              
+              {/* Text is nest in TouchableOpacity 
+               onpress is passed with addMeal function */}
+              <TouchableOpacity onPress={addMeal} style={styles.addMealButton}>
+                <Text style={styles.addMealButtonText}>Add Meal</Text>
+              </TouchableOpacity>
+
+            </View>
+
+        {/* Scrollable container for meal schedule */}
+            <ScrollView style={styles.scrollContainer}>
+
+              {/* Render the meal schedule here */}
+              {mealPlanData.map((entry, entryIndex) => (
+                <View key={entryIndex} style={styles.entry}>
+
+                    <Text style={styles.date}>Date: {entry.date}</Text>
+                    <Text style={styles.recipeTitle}>Recipe: {entry.recipe}</Text>
+
+                    {/*Text is nested in TouchableOpacity. passed with the removeEntry function   */}
+                    <TouchableOpacity onPress={() => removeEntry(entryIndex)}>
+                      <Text style={styles.deleteButton}>Delete Entry</Text>
+                    </TouchableOpacity>
+
+                </View>
+              ))}
+
+            </ScrollView>
       </View>
-
-      {/* Scrollable container for meal schedule */}
-      <ScrollView style={styles.scrollContainer}>
-        {/* Render the meal schedule here */}
-        {mealPlanData.map((entry, dateIndex) => (
-          <View key={dateIndex} style={styles.entry}>
-            <Text style={styles.date}>Date: {entry.date}</Text>
-            <Text style={styles.recipeTitle}>Recipe: {entry.recipe}</Text>
-            <TouchableOpacity onPress={() => removeEntry(dateIndex)}>
-              <Text style={styles.deleteButton}>Delete Entry</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
   );
 };
+
+// styling: the container is flex growing and account for 1 part of the parent container
 
 const styles = StyleSheet.create({
   container: {

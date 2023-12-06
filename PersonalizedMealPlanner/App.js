@@ -102,12 +102,12 @@ const recipesData = [
 const plannedMeals = [
   {
     id: 0,
-    date: '2023-12-6', // 'YYYY-MM-DD' format
+    date: '2023-12-7', // 'YYYY-MM-DD' format
     recipe: 'Oatmeal',
   },
   {
     id: 1,
-    date: '2023-11-29',
+    date: '2023-12-8',
     recipe: 'Chicken Salad',
   },
   {

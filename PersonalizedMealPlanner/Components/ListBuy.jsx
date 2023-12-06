@@ -1,67 +1,117 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 
+
+
+
 const ListBuy = () => {
+
+  
+  // state variable and update function to handle shoping list (array)
   const [shoppingList, setShoppingList] = useState([]);
+
+  // state variable and udpate function to handle ingredience (string)
   const [ingredient, setIngredient] = useState('');
+
+  // state variable and update function for the quantity (string)
   const [quantity, setQuantity] = useState('');
+
+  // state variable and update funciton for the unit (string)
   const [unit, setUnit] = useState('');
 
+  // function to handle add new item to the shoping list
+
   const addItemToShoppingList = () => {
+
+    // if the 3 input at the sametime available
     if (ingredient && quantity && unit) {
+
+      // create new shoping item
       const newItem = { ingredient, quantity, unit };
+      // add new item to shopinglist 
       setShoppingList([...shoppingList, newItem]);
+
+      // clear input for ingredient
       setIngredient('');
+
+      // clear input for quantity
       setQuantity('');
+
+      // clear input ofr unit
       setUnit('');
       console.log(shoppingList); // Add this line for debugging
     }
   };
 
+  // function remove shoping list
+
   const removeItemFromShoppingList = (index) => {
+
+    // create a compy of shipinglist
     const updatedList = [...shoppingList];
+
+    // use splice method to remove the shoping list item
     updatedList.splice(index, 1);
+
+    // update the shoping list after deleting
     setShoppingList(updatedList);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shopping List</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ingredient"
-        value={ingredient}
-        onChangeText={(text) => setIngredient(text)}
-      />
+
+        <Text style={styles.title}>Shopping List</Text>
+        {/*text input for Ingredient */}
+        <TextInput
+          style={styles.input}
+          placeholder="Ingredient"
+          value={ingredient}
+          onChangeText={(text) => setIngredient(text)}
+        />
+      
+      {/*text input for quantity */}
       <TextInput
         style={styles.input}
         placeholder="Quantity"
         value={quantity}
         onChangeText={(text) => setQuantity(text)}
       />
+
+      {/*text input for unit */}
       <TextInput
         style={styles.input}
         placeholder="Unit"
         value={unit}
         onChangeText={(text) => setUnit(text)}
       />
-      <TouchableOpacity onPress={addItemToShoppingList} style={styles.addButton}>
-        <Text style={styles.addButtonLabel}>Add Item</Text>
-      </TouchableOpacity>
+        {/*onPress of the Touchable is passed with addItemToShoppingList  */}
+        <TouchableOpacity onPress={addItemToShoppingList} style={styles.addButton}>
+          <Text style={styles.addButtonLabel}>Add Item</Text>
+        </TouchableOpacity>
+
+      {/*This is view for the item added into shopping list*/}
       <ScrollView style={styles.shoppingList}>
         {shoppingList.map((item, index) => (
-          <View key={index} style={styles.shoppingListItem}>
-            <Text style={styles.shoppingListItemText}>{item.ingredient}</Text>
-            <Text style={styles.shoppingListItemText}>{`${item.quantity} ${item.unit}`}</Text>
-            <TouchableOpacity onPress={() => removeItemFromShoppingList(index)} style={styles.removeButton}>
-              <Text style={styles.removeButtonText}>Remove</Text>
-            </TouchableOpacity>
-          </View>
+            <View key={index} style={styles.shoppingListItem}>
+
+                {/*Ingredient name */}
+                <Text style={styles.shoppingListItemText}>{item.ingredient}</Text>
+
+                {/*Ingredient quantity and unit */}
+                <Text style={styles.shoppingListItemText}>{`${item.quantity} ${item.unit}`}</Text>
+
+                {/*Touchable to handle removing item. onPress is passed with removeItemFromShopingList function*/}
+                <TouchableOpacity onPress={() => removeItemFromShoppingList(index)} style={styles.removeButton}>
+                  <Text style={styles.removeButtonText}>Remove</Text>
+                </TouchableOpacity>
+            </View>
         ))}
       </ScrollView>
-      <TouchableOpacity onPress={() => setShoppingList([])} style={styles.clearButton}>
-        <Text style={styles.clearButtonText}>Clear Shopping List</Text>
-      </TouchableOpacity>
+
+          {/*Touchable handle clearing the shopping list by passing the function to setShoppingList array to empty array */}
+        <TouchableOpacity onPress={() => setShoppingList([])} style={styles.clearButton}>
+          <Text style={styles.clearButtonText}>Clear Shopping List</Text>
+        </TouchableOpacity>
     </View>
   );
 };

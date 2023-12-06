@@ -6,13 +6,13 @@ import { View, TextInput, TouchableOpacity, ScrollView, Text, StyleSheet } from 
 // and recipeData to pass down data
 const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
 
-  // state variable and update function to store and update the search query when user keyin
+  // state variable and update function to store and update the search query when user keyin character
   const [searchQuery, setSearchQuery] = useState('');
 
-  // state variable nad update function to handle the array of recipes which were found matched based on the searhing query
+  // hold and update filtered recipes after finding match with the above query
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-  // state variable and update function to handle the selected recipe ID for showing details and lift up selected recipe
+  // hold and update selected recipe by the user
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
 // function to find tile of recipe which is mactched with the query and update to state variale
@@ -25,14 +25,13 @@ const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
   };
 
 // function to handle selected recipe
-// it takes in two parameter id and recipe passed from the the event: touching on the title of recicpe
+// it takes in two parameter id and recipe
 
   const handleSelectRecipe = (id, recipe) => {
     if (id === selectedRecipeId) {
       return; // Do nothing if the selected recipe is already the same
     }
 
-    //update selected recipe id
     setSelectedRecipeId(id);
 
     const selectedRecipeTitle = recipe.title;
@@ -45,51 +44,46 @@ const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
 
   return (
     <View style={styles.container}>
-      {/* Search input */}
+      
       <TextInput
         style={styles.searchInput}
         placeholder="Search for recipes..."
         value={searchQuery}
         onChangeText={handleSearch}
       />
-      {/*Conditional rendering if have searching querry a scroll view will be rendered to hold the filtered recipes' title  */}
+      
       {searchQuery ? (
 
         <ScrollView>
+          {filteredRecipes.map((item) => (
+            <View key={item.id}>
 
-            {filteredRecipes.map((item) => (
-              <View key={item.id}>
+              
+              <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
+                <Text style={styles.recipeItem}>{item.title}</Text>
+              </TouchableOpacity>
 
-                    {/* each recipe title found is nested in Touchableopacity, whenever there is a touch on the title the handleSelected recipe is called */}
-                    <TouchableOpacity onPress={() => handleSelectRecipe(item.id, item)}>
-                      <Text style={styles.recipeItem}>{item.title}</Text>
-                    </TouchableOpacity>
+             
+              {selectedRecipeId === item.id && (
 
-                    {/* Conditional rendering. below only being re-rendered if new recipe is selected */}
-                    {selectedRecipeId === item.id && (
+                <View style={styles.recipeDetails}>
+                  <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
 
-                        
-                        <View style={styles.recipeDetails}> {/* this is view for the detail of the selected recipe */}
+                      
+                      {item.ingredients.map((ingredient, index) => (
+                        <Text key={index} style={styles.ingredientItem}>
+                          {ingredient}
+                        </Text>
+                      ))}
 
-                          <Text style={styles.recipeDetailsTitle}>Ingredients:</Text>
+                  <Text style={styles.recipeDetailsTitle}>Instructions:</Text>
+                  
+                  <Text style={styles.instructionsText}>{item.instructions}</Text>
+                </View>
 
-                              {/*Display ingredient of selected recipe  */}
-                              {item.ingredients.map((ingredient, index) => (
-                                <Text key={index} style={styles.ingredientItem}>
-                                  {ingredient}
-                                </Text>
-                              ))}
-
-                          <Text style={styles.recipeDetailsTitle}>Instructions:</Text>
-                          
-                          {/*Display instruction of selected recipe */}
-                          <Text style={styles.instructionsText}>{item.instructions}</Text>
-                        </View>
-
-                    )}
-              </View>
-            ))}
-
+              )}
+            </View>
+          ))}
         </ScrollView>
 
       ) : null}
@@ -97,6 +91,24 @@ const RecipeSearch = ({ onRecipeSelect, recipesData }) => {
     </View>
   );
 };
+
+
+
+
+//47 {/* Search input */}
+
+//57 {/*Conditional rendering if have searching querry a scroll view will berender to hold the filter  */}
+
+//{/* each recipe title found is nested in Touchableopacity, whenever there is a touch on the title the handleSelected recipe is called */}
+
+
+
+// {/* Conditional rendering */}
+
+//{/*Display ingredient of selected recipe  */}
+
+//{/*Display instruction of selected recipe */}
+
 
 
 
