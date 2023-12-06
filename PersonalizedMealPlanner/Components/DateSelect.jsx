@@ -7,16 +7,16 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 //props onDateSelect to move formated date to parent App() component
 const DateSelect = ({ onDateSelect }) => {
-  // Create state variables
-  // Hold current date
-  const [date, setDate] = useState(new Date());
-  // Hold current mode
+  // State variable and update function to store and update Date
+    const [date, setDate] = useState(new Date());
+  // state variable and update function to store and update mode of the time-picker. Mode can be  time, datetime...
   const [mode, setMode] = useState('date');
-  // Hold a state variable of bool type use to conditional rendering for the time picker when the button is click
+  // state variable of bool tyle and update function to store and update the conditional rendering status of the time-picker
+  // when press the select button this variable change to true and allow the time picker be-ing rendered
   const [show, setShow] = useState(false);
 
   // two parameters event & selectedDate are used passed from datepicker to eventhandler
-  // in this cse event parameter is not used
+  // in this case event parameter is not used
   const onChange = (event, selectedDate) => {
     
     // with the selectedDate (parameter) passed from the touch event do below
@@ -26,17 +26,17 @@ const DateSelect = ({ onDateSelect }) => {
 
     setShow(Platform.OS === 'ios');
 
-    // 2. update current date to state variable date
+    // 2. update current date
     setDate(currentDate);
 
-    // 3. Format date time 
+    // 3. Format date time from javascript Date object to readable en-US format formed Year/Month/Date
     const formattedDate = currentDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
 
-    // 4. uplift the selected date from child component to parent
+    // 4. The date after being formated is uplifted via this props
     onDateSelect(formattedDate);
   };
   // this is eventhandler for touching the "Select Date" button
@@ -48,17 +48,19 @@ const DateSelect = ({ onDateSelect }) => {
 
   return (
     <View style={styles.container}>
-      {/* when touch into the button name "Select Date"
-      the picker will appear with mode is "date" it can be used for mode date & time */}
+      {/* The text Select Date is nested in the touchablopacity
+       if it is press the showMode() eventhandler is called
+       it then set the mode and allow time-picker appear after updating setShow
+        */}
       <TouchableOpacity
         style={styles.buttonContainer}
         onPress={() => showMode('date')}
       >
         <Text style={styles.buttonText}>Select Date</Text>
       </TouchableOpacity>
-      {/* show is state variable used for conditional rendering
-      when the button is press, show change to true then the timepicker appear
-      
+      {/* time-picker is assigned with date value, mode and onChange callback function
+       after touch to select a date this callback function will lift update the formatted date to parent App() component
+       and ready for the use of other component      
       */}
       {show && (
         // Date time picker is passed with props
@@ -75,6 +77,15 @@ const DateSelect = ({ onDateSelect }) => {
   );
 };
 
+
+{/** about the styling
+
+this container use flex mode
+it account 0.5 part space of parent container
+
+direction of child component: row
+
+*/}
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,

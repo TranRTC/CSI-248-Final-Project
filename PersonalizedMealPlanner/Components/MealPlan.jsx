@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-//import { v4 as uuidv4 } from 'uuid';
+
 
 // use to create ID for the mealplan object
 let IdCounter = 9;
 
+
+// function 4 arguments: 3 statevariable and 1 callback function
+// selectedDate, selectedRecipe, mealPlanData are passed down, SetMealPlanData is call back function to lift updata)
+
 const MealPlan = ({selectedDate, selectedRecipe, mealPlanData, SetMealPlanData }) => {
 
-  //const [mealPlanData, setMealPlanData] = useState(plannedMeals);
-  
+ 
 
   const addMeal = () => {
-    // check if date is selected and recipe is selected then
+
+    // check if date is selected and recipe is selected then.
     if (selectedDate && selectedRecipe) {
 
       // create new mealplan object with simple id by inreamenting after one another

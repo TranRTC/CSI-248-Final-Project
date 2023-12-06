@@ -18,10 +18,11 @@ const MealNotify = ({ mealPlans }) => {
   // use useEffect() to monitor the change in the dependency array and execute the scheduleNotification
   // MealPlan change & and Permission change will trigger the check "if" in side useEffect()
   useEffect(() => {
+    console.log("MealPlans in MealNotify:", mealPlans);
     if (permissionRequested) {
       scheduleNotifications(mealPlans);
     }
-  }, [mealPlans, permissionRequested]);
+  }, [mealPlans, permissionRequested]);//, 
 
   const handlePermissionRequest = async () => {
     const status = await requestNotificationsPermission();
@@ -34,26 +35,19 @@ const MealNotify = ({ mealPlans }) => {
   };
 
   // scheduling function
-  const scheduleNotifications = async (plans) => {
+  const scheduleNotifications = async (mealPlans) => {
 
     // get the time from the date 
     const now = new Date().getTime();
 
-    plans.forEach(async (plan) => {
+    mealPlans.forEach(async (plan) => {
       const planDate = new Date(plan.date).getTime();
       const oneDayBeforePlan = planDate - 86400000; // Corrected to subtract 24 hours in milliseconds
 
-      //=====================This code for checking the log of notification at console =================
-      console.log(`Processing meal plan: ${plan.recipe}`);
-      console.log(`Plan Date: ${new Date(planDate).toString()}`);
-      console.log(`One Day Before Plan: ${new Date(oneDayBeforePlan).toString()}`);
-      console.log(`Current Time: ${new Date(now).toString()}`);
-      console.log(`Will schedule notification? ${oneDayBeforePlan > now}`);
-      //===============================================================================================
-
+     
     // the logic for notification happen. Only schedule notification for future events
     
-      if (planDate >= now) {
+      if (planDate > now) {
         try {
           const scheduledNotification = await Notifications.scheduleNotificationAsync({
             content: {
@@ -88,7 +82,7 @@ const MealNotify = ({ mealPlans }) => {
     const now = new Date().getTime();
     return planDate > now;
   }).map((plan, index) => (
-    <TouchableOpacity key={index} style={styles.notificationCard}>
+    <TouchableOpacity key={plan.id} style={styles.notificationCard}>
       <Text style={styles.notificationTitle}>Next Meal: {plan.recipe}</Text>
       <Text style={styles.notificationSubtitle}>Scheduled for {plan.date}</Text>
     </TouchableOpacity>
